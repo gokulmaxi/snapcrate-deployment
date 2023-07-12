@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: snapcrate-deployment
+  labels:
+    app: snapcrate-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: snapcrate-app
+  template:
+    metadata:
+      labels:
+        app: snapcrate-app
+    spec:
+      containers:
+        - name: snapcrate-app-deployment
+          image: gokuldp/snapcrate-backend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+            - name: AzureStorageConfig__AccountName
+              value: "snapcrateblob"
+            - name: AzureStorageConfig__ImageContainer
+              value: "images"
+            - name: AzureStorageConfig__ThumbnailContainer
+              value: "thumbnails"
+            - name: AzureStorageConfig__AccountKey
+              value: "storage key"
+            - name: ConnStr
+              value: "sql connection string"

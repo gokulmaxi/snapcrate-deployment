@@ -1,0 +1,15 @@
+version: "3"
+services:
+  snapcrate:
+    image: gokuldp/snapcrate-backend
+    container_name: snapcrate-container
+    environment:
+      FLASK_DEBUG: "on"
+      AzureStorageConfig__AccountName: "snapcrateblob"
+      AzureStorageConfig__ImageContainer: "images"
+      AzureStorageConfig__ThumbnailContainer: "thumbnails"
+      AzureStorageConfig__AccountKey: "<< storage acc key>>"
+      ConnStr:  <<YOUR connection string>>
+      ASPNETCORE_ENVIRONMENT: "Development"
+    ports:
+      - 8080:80
